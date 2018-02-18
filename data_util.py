@@ -6,7 +6,7 @@ from scipy import ndimage
 import numpy as np
 import h5py
 
-def generate_h5(data_path, labels_to_classes_dictionary, outfile_path=None, shuffle_data=True, resize_height=224, resize_width=224, data_order='tf', data_file_ext='png', train_dev_test_ratio=[0.6, 0.2, 0.2]):
+def generate_h5(data_path, labels_to_classes_dictionary, outfile_path=None, shuffle_data=True, resize_height=224, resize_width=224, data_order='tf', train_dev_test_ratio=[0.6, 0.2, 0.2]):
 
     def label_to_class(label):
         return labels_to_classes_dictionary[str(label)]
@@ -22,7 +22,8 @@ def generate_h5(data_path, labels_to_classes_dictionary, outfile_path=None, shuf
         label_dir = os.path.join(data_path, label_str)
         if os.path.isdir(label_dir) and os.path.exists(label_dir):
         
-            addrs = glob.glob(os.path.join(label_dir, "*." + data_file_ext))
+            #addrs = glob.glob(os.path.join(label_dir, "*." + data_file_ext))
+            addrs = glob.glob(os.path.join(label_dir, "*.*"))
             labels = [int(label_int) for addr in addrs]
 
             all_addrs.extend(addrs)
